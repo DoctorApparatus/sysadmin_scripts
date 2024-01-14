@@ -15,7 +15,7 @@ while :; do
 
   echo "$lista" | while read -r pida xa bytesa; do
     [ -e "/proc/$pida" ] || continue
-    echo -en "$pida:\t"
+    echo -en "$( ps -p $pida -o comm= ):\t"
     bytesb=$(echo "$listb" | awk -v pid=$pida '$1==pid{print $3}')
     echo "$((($bytesb - $bytesa) / $delay)) b/s"
   done | sort -nk2 | tail
